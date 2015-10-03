@@ -1021,6 +1021,10 @@ void ArchProcessor::update_register_view(const QString &default_region_name, con
 		QString sreg(sregs[i]);
 		auto sregValue=state[sreg].value<edb::seg_reg_t>();
 		QString sregStr=sreg.toUpper()+QString(": %1").arg(sregValue.toHexString());
+		if(i==CS)
+			sregStr+=QString(" %1-bit").arg(edb::v1::pointer_size()*8);
+		else if(!edb::v1::debuggeeIs64Bit())
+			sregStr+="       ";
 		const Register base=state[sregs[i]+"_base"];
 		if(edb::v1::debuggeeIs32Bit() || i>=FS) {
 			if(base)
