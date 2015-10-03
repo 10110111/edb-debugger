@@ -1023,15 +1023,15 @@ void ArchProcessor::update_register_view(const QString &default_region_name, con
 		QString sregStr=sreg.toUpper()+QString(": %1").arg(sregValue.toHexString());
 		if(i==CS)
 			sregStr+=QString(" %1-bit").arg(edb::v1::pointer_size()*8);
+		else if(sregValue==0 && !edb::v1::debuggeeIs64Bit())
+			sregStr+=" NULL";
 		else if(!edb::v1::debuggeeIs64Bit())
 			sregStr+="       ";
 		const Register base=state[sregs[i]+"_base"];
 		if(edb::v1::debuggeeIs32Bit() || i>=FS) {
 			if(base)
 				sregStr+=QString(" (%1)").arg(base.valueAsAddress().toHexString());
-			else if(edb::v1::debuggeeIs32Bit() && sregValue==0)
-				sregStr+=" NULL";
-			else
+			else if(!(edb::v1::debuggeeIs32Bit() && sregValue==0))
 				sregStr+=" (?)";
 		}
 		register_view_items_[itemNumber]->setText(0, sregStr);
