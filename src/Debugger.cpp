@@ -16,6 +16,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <chrono>
+inline long currentTime()
+{
+    auto now = std::chrono::steady_clock::now().time_since_epoch();
+    return 1000*std::chrono::duration<long double>(now).count();
+}
+
 #include "Debugger.h"
 #include "ArchProcessor.h"
 #include "CommentServer.h"
@@ -2426,6 +2433,12 @@ edb::EVENT_STATUS Debugger::resume_status(bool pass_exception) {
 // Desc: resumes execution, handles the situation of being on a breakpoint as well
 //------------------------------------------------------------------------------
 void Debugger::resume_execution(EXCEPTION_RESUME pass_exception, DEBUG_MODE mode, bool forced) {
+	{
+		static auto t0=currentTime();
+		const auto t1=currentTime();
+		qDebug() << "resume_execution: dt:"<<(t1-t0) << "ms";
+		t0=t1;
+	}
 
 	edb::v1::clear_status();
 	Q_ASSERT(edb::v1::debugger_core);
