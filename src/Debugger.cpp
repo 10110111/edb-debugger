@@ -22,6 +22,7 @@ inline long currentTime()
     auto now = std::chrono::steady_clock::now().time_since_epoch();
     return 1000*std::chrono::duration<long double>(now).count();
 }
+#include <cstdlib>
 
 #include "Debugger.h"
 #include "ArchProcessor.h"
@@ -2434,6 +2435,8 @@ edb::EVENT_STATUS Debugger::resume_status(bool pass_exception) {
 //------------------------------------------------------------------------------
 void Debugger::resume_execution(EXCEPTION_RESUME pass_exception, DEBUG_MODE mode, bool forced) {
 	{
+		static int counter=0;
+		if(++counter==100) std::_Exit(0);
 		static auto t0=currentTime();
 		const auto t1=currentTime();
 		qDebug() <<(t1-t0);
