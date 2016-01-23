@@ -734,6 +734,7 @@ void analyze_operands(const State &state, const edb::Instruction &inst, QStringL
 // Desc:
 //------------------------------------------------------------------------------
 void analyze_jump_targets(const edb::Instruction &inst, QStringList &ret) {
+	return;
 	const edb::address_t address       = inst.rva();
 	const edb::address_t start_address = address - 128;
 	const edb::address_t end_address   = address + 127;
