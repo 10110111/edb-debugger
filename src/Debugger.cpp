@@ -2436,7 +2436,7 @@ void Debugger::resume_execution(EXCEPTION_RESUME pass_exception, DEBUG_MODE mode
 	{
 		static auto t0=currentTime();
 		const auto t1=currentTime();
-		qDebug() << "resume_execution: dt:"<<(t1-t0) << "ms";
+		qDebug() <<(t1-t0);
 		t0=t1;
 	}
 
