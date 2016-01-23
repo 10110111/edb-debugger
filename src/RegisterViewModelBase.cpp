@@ -12,6 +12,35 @@
 #include "IDebugger.h"
 #include "State.h"
 
+#include <chrono>
+namespace
+{
+long double currentTime()
+{
+    auto now = std::chrono::steady_clock::now().time_since_epoch();
+    return 1000*std::chrono::duration<long double>(now).count();
+}
+struct TimeCounter
+{
+	long double& totalTime;
+	long double startTime;
+	const char* str;
+	static int i;
+	TimeCounter(long double& totalTime, const char* str) :
+		totalTime(totalTime),
+		startTime(currentTime()),
+		str(str)
+	{}
+	~TimeCounter()
+	{
+		totalTime+=currentTime()-startTime;
+		if(++i%1000==0)
+			qDebug() << str << "exiting; current total time:" << (double)totalTime;
+	}
+};
+int TimeCounter::i=0;
+}
+
 #define CHECKED_CAST(TYPE,OBJECT) (Q_ASSERT(dynamic_cast<TYPE*>(OBJECT)),static_cast<TYPE*>(OBJECT))
 
 namespace RegisterViewModelBase
@@ -184,6 +213,9 @@ Qt::ItemFlags Model::flags(QModelIndex const& index) const
 
 QVariant Model::data(QModelIndex const& index, int role) const
 {
+	static long double totalTime=0;
+	TimeCounter tc(totalTime, "Model::data");
+
 	const auto*const item=getItem(index);
 	if(!item) return {};
 
