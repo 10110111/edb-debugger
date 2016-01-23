@@ -2,6 +2,39 @@
 #include "Util.h"
 #include <cstdint>
 #include <QList>
+#include <QDebug>
+
+#include <chrono>
+namespace
+{
+long double currentTime()
+{
+    auto now = std::chrono::steady_clock::now().time_since_epoch();
+    return 1000*std::chrono::duration<long double>(now).count();
+}
+struct TimeCounter
+{
+	long double& totalTime;
+	long double startTime;
+	const char* str;
+	static int i;
+	TimeCounter(long double& totalTime, const char* str) :
+		totalTime(totalTime),
+		startTime(currentTime()),
+		str(str)
+	{
+		qDebug() << "entering" << str;
+	}
+	~TimeCounter()
+	{
+		const auto dt=currentTime()-startTime;
+		totalTime+=dt;
+		if(++i%1==0)
+			qDebug() << str << "exiting; took" << (double)dt << "ms, current total time:" << (double)totalTime;
+	}
+};
+int TimeCounter::i=0;
+}
 
 namespace
 {
@@ -680,6 +713,8 @@ void RegisterViewModel::showGenericCategories()
 
 void RegisterViewModel::setCPUMode(CPUMode newMode)
 {
+	static long double totalTime=0;
+	TimeCounter tc(totalTime, "RegViewModel::setCPUMode()");
 	if(mode==newMode) return;
 
 	beginResetModel();

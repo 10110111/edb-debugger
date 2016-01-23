@@ -30,11 +30,14 @@ struct TimeCounter
 		totalTime(totalTime),
 		startTime(currentTime()),
 		str(str)
-	{}
+	{
+		if(++i%1000==0)
+			qDebug() << "entering" << str;
+	}
 	~TimeCounter()
 	{
 		totalTime+=currentTime()-startTime;
-		if(++i%1000==0)
+		if(i%1000==0)
 			qDebug() << str << "exiting; current total time:" << (double)totalTime;
 	}
 };

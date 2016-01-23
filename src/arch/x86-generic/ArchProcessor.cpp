@@ -47,6 +47,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <asm/unistd.h>
 #endif
 
+#include <chrono>
+namespace
+{
+long double currentTime()
+{
+    auto now = std::chrono::steady_clock::now().time_since_epoch();
+    return 1000*std::chrono::duration<long double>(now).count();
+}
+struct TimeCounter
+{
+	long double& totalTime;
+	long double startTime;
+	const char* str;
+	static int i;
+	TimeCounter(long double& totalTime, const char* str) :
+		totalTime(totalTime),
+		startTime(currentTime()),
+		str(str)
+	{
+		qDebug() << "entering" << str;
+	}
+	~TimeCounter()
+	{
+		const auto dt=currentTime()-startTime;
+		totalTime+=dt;
+		if(++i%1==0)
+			qDebug() << str << "exiting; took" << (double)dt << "ms, current total time:" << (double)totalTime;
+	}
+};
+int TimeCounter::i=0;
+}
+
 namespace {
 
 using std::size_t;
@@ -1073,6 +1105,9 @@ void updateSSEAVXRegs(RegisterViewModel& model, const State& state, bool hasSSE,
 // Desc:
 //------------------------------------------------------------------------------
 void ArchProcessor::update_register_view(const QString &default_region_name, const State &state) {
+	static long double totalTime=0;
+	TimeCounter tc(totalTime, "ArchProcessor::update_register_view()");
+
 	const QPalette palette = QApplication::palette();
 
 	auto& model=getModel();
