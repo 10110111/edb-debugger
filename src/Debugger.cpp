@@ -451,6 +451,7 @@ void Debugger::update_menu_state(GUI_STATE state) {
 		ui.action_Kill->setEnabled(true);
 		add_tab_->setEnabled(true);
 		status_->setText(Paused);
+		status_->repaint();
 		break;
 	case RUNNING:
 		ui.actionRun_Until_Return->setEnabled(false);
@@ -467,6 +468,7 @@ void Debugger::update_menu_state(GUI_STATE state) {
 		ui.action_Kill->setEnabled(true);
 		add_tab_->setEnabled(true);
 		status_->setText(Running);
+		status_->repaint();
 		break;
 	case TERMINATED:
 		ui.actionRun_Until_Return->setEnabled(false);
@@ -483,6 +485,7 @@ void Debugger::update_menu_state(GUI_STATE state) {
 		ui.action_Kill->setEnabled(false);
 		add_tab_->setEnabled(false);
 		status_->setText(Terminated);
+		status_->repaint();
 		break;
 	}
 
