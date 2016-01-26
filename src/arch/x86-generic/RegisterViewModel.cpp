@@ -16,14 +16,14 @@ struct TimeCounter
 {
 	long double& totalTime;
 	long double startTime;
-	const char* str;
+	QString str;
 	static int i;
-	TimeCounter(long double& totalTime, const char* str) :
+	TimeCounter(long double& totalTime, QString const& str) :
 		totalTime(totalTime),
 		startTime(currentTime()),
 		str(str)
 	{
-		qDebug() << "entering" << str;
+		qDebug() << "entering" << qPrintable(str);
 	}
 	~TimeCounter()
 	{
@@ -714,7 +714,7 @@ void RegisterViewModel::showGenericCategories()
 void RegisterViewModel::setCPUMode(CPUMode newMode)
 {
 	static long double totalTime=0;
-	TimeCounter tc(totalTime, "RegViewModel::setCPUMode()");
+	TimeCounter tc(totalTime, QString("RegViewModel::setCPUMode(%1)").arg(long(newMode)));
 	if(mode==newMode) return;
 
 	beginResetModel();
