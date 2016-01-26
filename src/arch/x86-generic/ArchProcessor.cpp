@@ -16,6 +16,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <valgrind/callgrind.h>
+
 #include "ArchProcessor.h"
 #include "Configuration.h"
 #include "IDebugger.h"
@@ -67,9 +69,11 @@ struct TimeCounter
 		str(str)
 	{
 		qDebug() << "entering" << str;
+	CALLGRIND_START_INSTRUMENTATION;
 	}
 	~TimeCounter()
 	{
+		CALLGRIND_STOP_INSTRUMENTATION;
 		const auto dt=currentTime()-startTime;
 		totalTime+=dt;
 		if(++i%1==0)
