@@ -83,9 +83,9 @@ void RegisterListWidget::reset()
 	//        Maybe it's better to save which rows have to be expanded based on user actions and act accordingly.
 	for(int row=0;row<model()->rowCount();++row)
 	{
-		setExpanded(model()->index(row,0),true);
-		setFirstColumnSpanned(row,QModelIndex(),true);
+//		setExpanded(model()->index(row,0),true);
+//		setFirstColumnSpanned(row,QModelIndex(),true);
 	}
 	header()->setResizeMode(QHeaderView::ResizeToContents);
-	header()->setStretchLastSection(false);
+//	header()->setStretchLastSection(false);
 }
