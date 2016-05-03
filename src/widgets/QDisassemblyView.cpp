@@ -582,17 +582,17 @@ int QDisassemblyView::draw_instruction(QPainter &painter, const edb::Instruction
 				opcode);
 		} else {
 
+			const bool showSymbolicAddresses=edb::v1::config().show_symbolic_addresses;
+			const bool showLocalModuleNames=edb::v1::config().show_local_module_name_in_jump_targets;
+
 			if(is_call(inst) || is_jump(inst)) {
 				if(inst.operand_count() == 1) {
 					const edb::Operand &oper = inst.operands()[0];
 					if(oper.general_type() == edb::Operand::TYPE_REL) {
 
-						const bool showSymbolicAddresses=edb::v1::config().show_symbolic_addresses;
-
 						static const QRegExp addrPattern("0x[0-9a-fA-F]+");
 						const edb::address_t target = oper.relative_target();
 
-						const bool showLocalModuleNames=edb::v1::config().show_local_module_name_in_jump_targets;
 						const bool prefixed=showLocalModuleNames || !targetIsLocal(target,inst.rva());
 						QString sym = edb::v1::symbol_manager().find_address_name(target,prefixed);
 						if(sym.isEmpty() && target==inst.size()+inst.rva())
@@ -607,6 +607,45 @@ int QDisassemblyView::draw_instruction(QPainter &painter, const edb::Instruction
 								opcode.append(QString(" <%2>").arg(sym));
 						}
 					}
+				}
+			} else if(showSymbolicAddresses) {
+				for(unsigned i=0;i<inst.operand_count();++i) {
+					const auto& oper=inst.operands()[i];
+					// FIXME: we should check if the immediate non-obviously-addresses have relocations, otherwise they may be non-addresses
+					// FIXME: beware of multiple symbols having the same address (e.g. std::cerr vs _edata)
+					if((oper.complete_type()==edb::Operand::TYPE_IMMEDIATE32 && edb::v1::debuggeeIs32Bit()) ||
+							(oper.complete_type()==edb::Operand::TYPE_IMMEDIATE64 && edb::v1::debuggeeIs64Bit()))
+					{
+						const edb::address_t target = oper.immediate();
+						const bool prefixed=showLocalModuleNames || !targetIsLocal(target,inst.rva());
+						QString sym = edb::v1::symbol_manager().find_address_name(target,prefixed);
+						if(!sym.isEmpty())
+						{
+							// NOTE: QString::number used instead of address_t::toHexString to avoid leading zeros
+							// FIXME: add support for uppercase disassembly
+							opcode.replace(QRegExp("0x0*"+QString::number(target,16)),sym);
+						}
+					}
+					else if(oper.general_type()==edb::Operand::TYPE_EXPRESSION &&
+							(oper.expression().base==edb::Operand::Register::X86_REG_INVALID ||
+							 oper.expression().base==edb::Operand::Register::X86_REG_RIP) &&
+							oper.expression().index==edb::Operand::Register::X86_REG_INVALID &&
+							(oper.expression().segment==edb::Operand::Segment::Reg::REG_INVALID ||
+							 oper.expression().segment==edb::Operand::Segment::Reg::DS))
+					{
+						const edb::address_t target = (oper.expression().base==edb::Operand::Register::X86_REG_RIP ?
+													   oper.expression().base+inst.size() : 0)
+													   + oper.expression().displacement;
+						const bool prefixed=showLocalModuleNames || !targetIsLocal(target,inst.rva());
+						QString sym = edb::v1::symbol_manager().find_address_name(target,prefixed);
+						if(!sym.isEmpty())
+						{
+							// NOTE: QString::number used instead of address_t::toHexString to avoid leading zeros
+							// FIXME: add support for uppercase disassembly
+							opcode.replace(QRegExp("0x0*"+QString::number(target,16)),sym);
+						}
+					}
+
 				}
 			}
 
