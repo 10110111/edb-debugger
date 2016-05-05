@@ -313,43 +313,43 @@ void PlatformThread::get_state(State *state) {
 		// may remain not updated. Also, this way we'll mark all the unfilled values.
 		state_impl->clear();
 
-			if(EDB_IS_64_BIT)
-				fillStateFromSimpleRegs(state_impl); // 64-bit GETREGS call always returns 64-bit state, so use it
-			else if(!fillStateFromPrStatus(state_impl)) // if EDB is 32 bit, use GETREGSET so that we get 64-bit state for 64-bit debuggee
-				fillStateFromSimpleRegs(state_impl); // failing that, try to just get what we can
+		if(EDB_IS_64_BIT)
+			fillStateFromSimpleRegs(state_impl); // 64-bit GETREGS call always returns 64-bit state, so use it
+		else if(!fillStateFromPrStatus(state_impl)) // if EDB is 32 bit, use GETREGSET so that we get 64-bit state for 64-bit debuggee
+			fillStateFromSimpleRegs(state_impl); // failing that, try to just get what we can
 
-			long ptraceStatus=0;
+		long ptraceStatus=0;
 
-			// First try to get full XSTATE
-			X86XState xstate;
-			iovec iov={&xstate,sizeof(xstate)};
-			ptraceStatus=ptrace(PTRACE_GETREGSET, tid_, NT_X86_XSTATE, &iov);
-			if(ptraceStatus==-1 || !state_impl->fillFrom(xstate,iov.iov_len)) {
+		// First try to get full XSTATE
+		X86XState xstate;
+		iovec iov={&xstate,sizeof(xstate)};
+		ptraceStatus=ptrace(PTRACE_GETREGSET, tid_, NT_X86_XSTATE, &iov);
+		if(ptraceStatus==-1 || !state_impl->fillFrom(xstate,iov.iov_len)) {
 
-				// No XSTATE available, get just floating point and SSE registers
-				static bool getFPXRegsSupported=(EDB_IS_32_BIT ? true : false);
-				UserFPXRegsStructX86 fpxregs;
-				// This should be automatically optimized out on amd64. If not, not a big deal.
-				// Avoiding conditional compilation to facilitate syntax error checking
-				if(getFPXRegsSupported)
-					getFPXRegsSupported=(ptrace(PTRACE_GETFPXREGS, tid_, 0, &fpxregs)!=-1);
+			// No XSTATE available, get just floating point and SSE registers
+			static bool getFPXRegsSupported=(EDB_IS_32_BIT ? true : false);
+			UserFPXRegsStructX86 fpxregs;
+			// This should be automatically optimized out on amd64. If not, not a big deal.
+			// Avoiding conditional compilation to facilitate syntax error checking
+			if(getFPXRegsSupported)
+				getFPXRegsSupported=(ptrace(PTRACE_GETFPXREGS, tid_, 0, &fpxregs)!=-1);
 
-				if(getFPXRegsSupported) {
-					state_impl->fillFrom(fpxregs);
-				} else {
-					// No GETFPXREGS: on x86 this means SSE is not supported
-					//                on x86_64 FPREGS already contain SSE state
-					user_fpregs_struct fpregs;
-					if((ptraceStatus=ptrace(PTRACE_GETFPREGS, tid_, 0, &fpregs))!=-1)
-						state_impl->fillFrom(fpregs);
-					else
-						perror("PTRACE_GETFPREGS failed");
-				}
+			if(getFPXRegsSupported) {
+				state_impl->fillFrom(fpxregs);
+			} else {
+				// No GETFPXREGS: on x86 this means SSE is not supported
+				//                on x86_64 FPREGS already contain SSE state
+				user_fpregs_struct fpregs;
+				if((ptraceStatus=ptrace(PTRACE_GETFPREGS, tid_, 0, &fpregs))!=-1)
+					state_impl->fillFrom(fpregs);
+				else
+					perror("PTRACE_GETFPREGS failed");
 			}
+		}
 
-			// debug registers
-			for(std::size_t i=0;i<8;++i)
-				state_impl->x86.dbgRegs[i] = get_debug_register(i);
+		// debug registers
+		for(std::size_t i=0;i<8;++i)
+			state_impl->x86.dbgRegs[i] = get_debug_register(i);
 	}
 }
 
