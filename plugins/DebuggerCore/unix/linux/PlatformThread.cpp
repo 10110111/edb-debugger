@@ -299,6 +299,52 @@ void PlatformThread::resume(edb::EVENT_STATUS status) {
 	core_->ptrace_continue(tid_, code);
 }
 
+static constexpr auto NR_ptrace64=101;
+bool PlatformThread::ptracePeekUser64(pid_t pid, std::size_t offset,void* result) const {
+	assert(EDB_IS_32_BIT);
+	assert(core_->osIs64Bit);
+	int err=-1;
+	asm(R"(
+	.intel_syntax noprefix
+	lcall 0x33:1f
+	jmp 2f
+	1:
+	.byte 0x41 # REX.B
+	mov edx,ecx # mov r10d,ecx with REX.B
+	syscall
+	lret
+	2:
+	.att_syntax
+		)":"=a"(err):"a"(NR_ptrace64),"D"(PTRACE_PEEKUSER),"S"(pid),"d"(offset),"c"(result));
+	if(err)
+	{
+		errno=-err;
+		perror("ptrace64(PEEKUSER) failed");
+		return false;
+	}
+	return true;
+}
+
+bool PlatformThread::fillStateFromSimpleRegs64_hack(PlatformState* state) {
+
+	UserRegsStructX86_64 regs;
+	util::markMemory(&regs,sizeof regs);
+	bool ok=true;
+
+	// Unfortunately, ptrace64 with PTRACE_GETREGS still returns 32-bit
+	// user_regs_struct to a 32-bit debugger, so we'll have to PTRACE_PEEKUSER
+	// value-by-value
+	for(std::size_t offset=0;offset<sizeof regs;offset+=sizeof(std::uint64_t))
+		ok=ptracePeekUser64(tid_,offset,reinterpret_cast<char*>(&regs)+offset) && ok;
+
+	if(ok) {
+		state->fillFrom(regs);
+		fillSegmentBases(state);
+		return true;
+	}
+	return false;
+}
+
 //------------------------------------------------------------------------------
 // Name: get_state
 // Desc:
@@ -317,6 +363,10 @@ void PlatformThread::get_state(State *state) {
 			fillStateFromSimpleRegs(state_impl); // 64-bit GETREGS call always returns 64-bit state, so use it
 		else if(!fillStateFromPrStatus(state_impl)) // if EDB is 32 bit, use GETREGSET so that we get 64-bit state for 64-bit debuggee
 			fillStateFromSimpleRegs(state_impl); // failing that, try to just get what we can
+
+		// 
+		if(EDB_IS_32_BIT && state_impl->is64Bit() && !state_impl->x86.gpr64Filled)
+			fillStateFromSimpleRegs64_hack(state_impl);
 
 		long ptraceStatus=0;
 

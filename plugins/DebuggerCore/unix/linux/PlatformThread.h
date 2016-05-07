@@ -71,6 +71,8 @@ private:
 	void fillSegmentBases(PlatformState* state);
 	bool fillStateFromPrStatus(PlatformState* state);
 	bool fillStateFromSimpleRegs(PlatformState* state);
+	bool fillStateFromSimpleRegs64_hack(PlatformState* state);
+	bool ptracePeekUser64(pid_t pid, std::size_t offset,void* result) const;
 	
 private:
 	unsigned long get_debug_register(std::size_t n);
