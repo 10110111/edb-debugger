@@ -73,10 +73,11 @@ private:
 	bool fillStateFromSimpleRegs(PlatformState* state);
 	bool fillStateFromSimpleRegs64_hack(PlatformState* state);
 	bool ptracePeekUser64(pid_t pid, std::size_t offset,void* result) const;
+	bool ptracePokeUser64(pid_t pid, std::size_t offset,std::uint64_t value) const;
 	
 private:
 	unsigned long get_debug_register(std::size_t n);
-	long set_debug_register(std::size_t n, long value);
+	long set_debug_register(std::size_t n, edb::reg_t value);
 	
 private:
 	DebuggerCore *const core_;

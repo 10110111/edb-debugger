@@ -325,6 +325,31 @@ bool PlatformThread::ptracePeekUser64(pid_t pid, std::size_t offset,void* result
 	return true;
 }
 
+bool PlatformThread::ptracePokeUser64(pid_t pid, std::size_t offset,std::uint64_t value) const {
+	assert(EDB_IS_32_BIT);
+	assert(core_->osIs64Bit);
+	int err=-1;
+	asm(R"(
+	.intel_syntax noprefix
+	lcall 0x33:1f
+	jmp 2f
+	1:
+	.byte 0x4c # REX.WR
+	mov edx,[ecx] # mov r10,[rcx] with REX.WR
+	syscall
+	lret
+	2:
+	.att_syntax
+		)":"=a"(err):"a"(NR_ptrace64),"D"(PTRACE_POKEUSER),"S"(pid),"d"(offset),"c"(&value));
+	if(err)
+	{
+		errno=-err;
+		perror("ptrace64(POKEUSER) failed");
+		return false;
+	}
+	return true;
+}
+
 bool PlatformThread::fillStateFromSimpleRegs64_hack(PlatformState* state) {
 
 	UserRegsStructX86_64 regs;
@@ -483,7 +508,13 @@ unsigned long PlatformThread::get_debug_register(std::size_t n) {
 // Name: set_debug_register
 // Desc:
 //------------------------------------------------------------------------------
-long PlatformThread::set_debug_register(std::size_t n, long value) {
+long PlatformThread::set_debug_register(std::size_t n, edb::reg_t value) {
+	if(n==4||n==5) return -1;
+	if(EDB_IS_32_BIT && edb::v1::debuggeeIs64Bit()) {
+		if(ptracePokeUser64(tid_,offsetofDebugReg64+n*sizeof(std::uint64_t),value))
+			return 0;
+		qWarning()<<qPrintable(QString("Failed to set DR%1 to 0x%2 via PEEKUSER in 64-bit mode, will try 32-bit ptrace call, this will truncate value to lower 32 bits").arg(n).arg(value.toHexString()));
+	}
 	return ptrace(PTRACE_POKEUSER, tid_, offsetof(struct user, u_debugreg[n]), value);
 }
 
