@@ -464,11 +464,18 @@ void PlatformThread::set_state(const State &state) {
 	}
 }
 
+static constexpr std::size_t offsetofDebugReg64=848;
 //------------------------------------------------------------------------------
 // Name: get_debug_register
 // Desc:
 //------------------------------------------------------------------------------
 unsigned long PlatformThread::get_debug_register(std::size_t n) {
+	unsigned long result;
+	if(EDB_IS_32_BIT && edb::v1::debuggeeIs64Bit()) {
+		if(ptracePeekUser64(tid_,offsetofDebugReg64+n*sizeof(std::uint64_t),&result))
+			return result;
+		qWarning()<<"Failed to get debug register via PEEKUSER in 64-bit mode, will try 32-bit ptrace call, the result will be 32-bit";
+	}
 	return ptrace(PTRACE_PEEKUSER, tid_, offsetof(struct user, u_debugreg[n]), 0);
 }
 
