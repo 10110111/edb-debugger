@@ -1194,8 +1194,52 @@ bool QDisassemblyView::event(QEvent *event) {
 					const edb::Instruction inst(buf, buf + buf_size, address);
 					const QString byte_buffer = format_instruction_bytes(inst);
 
+					// Construct correction for QTipLabel offset
+					// these constants are hard coded in QTipLabel constructor
+					const auto ttLabelMargin=1+style()->pixelMetric(QStyle::PM_ToolTipLabelFrameWidth);
+					const auto ttLabelIndent=1;
+					const QPoint ttCorrection
+						/* 2 is hardcoded in QTipLabel, named constants account for
+						   QLabelPrivate::documentRect() corrections called by QLabelPrivate::layoutRect() */
+							{2+ttLabelMargin+ttLabelIndent,
+							 ttLabelMargin+
+#ifdef Q_WS_WIN
+											21
+#else
+											16
+#endif
+							};
+
+					// Construct anchor so event directly overlays line of code.
+					// NOTE: have to take into account the displacement due to how line_height() works
+					const auto textVertDispl=qMax(0,(current_address_icon_.height()-font_height_)/2);
+					const QPoint anchor=viewport()->mapToGlobal(
+										{line1()+int(font_width_/2),
+										 helpEvent->y()-helpEvent->y()%line_height()+textVertDispl});
+
+					const auto ttPoint=anchor-ttCorrection;
+
 					if((line1() + byte_buffer.size() * font_width_) > line2()) {
-						QToolTip::showText(helpEvent->globalPos(), byte_buffer);
+						// We want pixel-perfect extension of the text, font is a necessary part of this
+						// NOTE: this will change tooltip font globally. I'm not sure how to localize it
+						// to QDisassemblyView only
+						QToolTip::setFont(font());
+						QToolTip::showText(ttPoint, byte_buffer,viewport());
+						/*
+						 A hack to avoid closing of QTipLabel due to strange
+						 QEvent::Leave it gets when mouse cursor is above it.
+						 These refreshes of text after the tip is shown make
+						 QTipLabel reuse the widget, and since it's already
+						 shown due to processEvents(), it won't get any new
+						 Leave events.
+						 NOTE: we have to use a bit different text from current
+						 each time, otherwise it'll have no effect.
+ 						 */
+						QApplication::processEvents();
+						QToolTip::showText(ttPoint, byte_buffer+" ",viewport());
+						QApplication::processEvents();
+						QToolTip::showText(ttPoint, byte_buffer,viewport());
+
 						show = true;
 					}
 				}
