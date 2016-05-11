@@ -76,7 +76,7 @@ private:
 	bool ptracePokeUser64(pid_t pid, std::size_t offset,std::uint64_t value) const;
 	
 private:
-	unsigned long get_debug_register(std::size_t n);
+	edb::reg_t get_debug_register(std::size_t n);
 	long set_debug_register(std::size_t n, edb::reg_t value);
 	
 private:

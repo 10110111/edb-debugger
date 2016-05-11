@@ -494,8 +494,8 @@ static constexpr std::size_t offsetofDebugReg64=848;
 // Name: get_debug_register
 // Desc:
 //------------------------------------------------------------------------------
-unsigned long PlatformThread::get_debug_register(std::size_t n) {
-	unsigned long result;
+edb::reg_t PlatformThread::get_debug_register(std::size_t n) {
+	std::uint64_t result;
 	if(EDB_IS_32_BIT && edb::v1::debuggeeIs64Bit()) {
 		if(ptracePeekUser64(tid_,offsetofDebugReg64+n*sizeof(std::uint64_t),&result))
 			return result;
