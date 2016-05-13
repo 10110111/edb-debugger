@@ -1218,7 +1218,9 @@ bool QDisassemblyView::event(QEvent *event) {
 			bool show = false;
 
 			auto helpEvent = static_cast<QHelpEvent *>(event);
-
+			const auto lineTop=helpEvent->y()-helpEvent->y()%line_height();
+			const auto textVertDispl=qMax(0,(current_address_icon_.height()-font_height_)/2);
+			const auto textTop=lineTop+textVertDispl;
 			if(helpEvent->x() >= line1() && helpEvent->x() < line2()) {
 
 				const edb::address_t address = addressFromPoint(helpEvent->pos());
@@ -1230,11 +1232,10 @@ bool QDisassemblyView::event(QEvent *event) {
 				if(edb::v1::get_instruction_bytes(address, buf, &buf_size)) {
 					const edb::Instruction inst(buf, buf + buf_size, address);
 					const QString byte_buffer = format_instruction_bytes(inst);
+					const auto textLeft=line1()+int(font_width_/2);
 
-					if((line1() + byte_buffer.size() * font_width_) > line2()) {
-						const auto lineTop=helpEvent->y()-helpEvent->y()%line_height();
-						const auto textVertDispl=qMax(0,(current_address_icon_.height()-font_height_)/2);
-						const auto textTopLeft=viewport()->mapToGlobal({line1()+int(font_width_/2), lineTop+textVertDispl});
+					if((textLeft + byte_buffer.size() * font_width_) > line2()) {
+						const auto textTopLeft=viewport()->mapToGlobal({textLeft, textTop});
 						showToolTipTextExtender(byte_buffer,textTopLeft,font(),style(),viewport());
 
 						show = true;
