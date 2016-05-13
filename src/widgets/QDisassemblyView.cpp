@@ -770,7 +770,7 @@ void QDisassemblyView::paintEvent(QPaintEvent *) {
 	show_addresses_.clear();
 	show_addresses_.insert(address_offset_ + current_line);
 
-	const int bytes_width = l2 - l1;
+	const int bytes_width = l2 - l1 - font_width_/2;
 
 	const QBrush alternated_base_color = palette().alternateBase();
 	const QPen divider_pen             = palette().shadow().color();
