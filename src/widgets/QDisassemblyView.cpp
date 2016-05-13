@@ -1221,7 +1221,17 @@ bool QDisassemblyView::event(QEvent *event) {
 			const auto lineTop=helpEvent->y()-helpEvent->y()%line_height();
 			const auto textVertDispl=qMax(0,(current_address_icon_.height()-font_height_)/2);
 			const auto textTop=lineTop+textVertDispl;
-			if(helpEvent->x() >= line1() && helpEvent->x() < line2()) {
+			if(helpEvent->x() < line1()) {
+				const auto address=addressFromPoint(helpEvent->pos());
+				const auto sym=edb::v1::symbol_manager().find_address_name(address);
+				const auto address_buffer=formatAddress(address)+(sym.isEmpty()?"":" "+sym);
+				const auto textLeft=breakpoint_icon_.width()+1;
+				if(textLeft+address_buffer.size()*font_width_ > line1()) {
+					const auto textTopLeft=viewport()->mapToGlobal({textLeft, textTop});
+					showToolTipTextExtender(address_buffer,textTopLeft,font(),style(),viewport());
+					show=true;
+				}
+			} else if(helpEvent->x() >= line1() && helpEvent->x() < line2()) {
 
 				const edb::address_t address = addressFromPoint(helpEvent->pos());
 
