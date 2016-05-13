@@ -20,34 +20,48 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <QLineEdit>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QComboBox>
 #include <QDebug>
 #include "edb.h"
+
+static void warnTheUser()
+{
+	qWarning() << QObject::tr("Failed to setup program arguments and working directory entries for file open dialog, please report and be sure to tell your Qt version");
+}
 
 DialogOpenProgram::DialogOpenProgram(QWidget* parent,const QString& caption, const QString& directory,const QString& filter)
 	: QFileDialog(parent,caption,directory,filter),
 			  argsEdit(new QLineEdit(this)),
 			  workDir(new QLineEdit(QDir::currentPath(),this))
 {
-	QGridLayout* const layout=dynamic_cast<QGridLayout*>(this->layout());
 	// We want to be sure that the layout is as we expect it
-	if(layout && layout->rowCount()==4 && layout->columnCount()==3)
-	{
-		setFileMode(QFileDialog::ExistingFile);
-		const int rowCount=layout->rowCount();
-		QPushButton* const browseDirButton(new QPushButton(tr("&Browse..."),this));
-		const auto argsLabel=new QLabel(tr("Program &arguments:"),this);
-		argsLabel->setBuddy(argsEdit);
-		layout->addWidget(argsLabel,rowCount,0);
-		layout->addWidget(argsEdit,rowCount,1);
-		const auto workDirLabel=new QLabel(tr("Working &directory:"),this);
-		workDirLabel->setBuddy(workDir);
-		layout->addWidget(workDirLabel,rowCount+1,0);
-		layout->addWidget(workDir,rowCount+1,1);
-		layout->addWidget(browseDirButton,rowCount+1,2);
+	QGridLayout* const layout=dynamic_cast<QGridLayout*>(this->layout());
+	if(!layout || layout->rowCount()!=4 || layout->columnCount()!=3) { warnTheUser(); return; }
 
-		connect(browseDirButton,SIGNAL(clicked()),this,SLOT(browsePressed()));
-	}
-	else qWarning() << tr("Failed to setup program arguments and working directory entries for file open dialog, please report and be sure to tell your Qt version");
+	// File type filter is useless for our purposes, so hide it
+	const auto filterComboItem=layout->itemAtPosition(3,1);
+	const auto filterLabelItem=layout->itemAtPosition(3,0);
+	if(!filterComboItem || !filterLabelItem) { warnTheUser(); return; }
+	const auto filterCombo=dynamic_cast<QComboBox*>(filterComboItem->widget());
+	const auto filterLabel=dynamic_cast<QLabel*>(filterLabelItem->widget());
+	if(!filterCombo || !filterLabel) { warnTheUser(); return; }
+	filterCombo->hide();
+	filterLabel->hide();
+
+	setFileMode(QFileDialog::ExistingFile);
+	const int rowCount=layout->rowCount();
+	QPushButton* const browseDirButton(new QPushButton(tr("&Browse..."),this));
+	const auto argsLabel=new QLabel(tr("Program &arguments:"),this);
+	argsLabel->setBuddy(argsEdit);
+	layout->addWidget(argsLabel,rowCount-1,0);
+	layout->addWidget(argsEdit,rowCount-1,1);
+	const auto workDirLabel=new QLabel(tr("Working &directory:"),this);
+	workDirLabel->setBuddy(workDir);
+	layout->addWidget(workDirLabel,rowCount,0);
+	layout->addWidget(workDir,rowCount,1);
+	layout->addWidget(browseDirButton,rowCount,2);
+
+	connect(browseDirButton,SIGNAL(clicked()),this,SLOT(browsePressed()));
 }
 
 void DialogOpenProgram::browsePressed()
