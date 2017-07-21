@@ -165,9 +165,12 @@ const std::shared_ptr<Symbol> SymbolManager::find_near_symbol(edb::address_t add
 void SymbolManager::add_symbol(const std::shared_ptr<Symbol> &symbol) {
 	Q_ASSERT(symbol);
 	symbols_.push_back(symbol);
-	symbols_by_address_[symbol->address] = symbol;
 	symbols_by_name_[symbol->name]       = symbol;
 	symbols_by_file_[symbol->file].push_back(symbol);
+	// Avoid adding a symbol for current address if we already have another one with greater size
+	const auto existingSymByAddrIt=symbols_by_address_.find(symbol->address);
+	if(existingSymByAddrIt==symbols_by_address_.end() || (*existingSymByAddrIt)->size < symbol->size)
+		symbols_by_address_[symbol->address] = symbol;
 }
 
 //------------------------------------------------------------------------------
