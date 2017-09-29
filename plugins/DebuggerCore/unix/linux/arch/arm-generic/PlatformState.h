@@ -81,6 +81,7 @@ private:
 		bool filled=false;
 		std::array<edb::reg_t, GPR_COUNT> GPRegs;
 		edb::reg_t cpsr;
+		edb::reg_t origR0;
 	public:
 		void clear();
 		bool empty() const;

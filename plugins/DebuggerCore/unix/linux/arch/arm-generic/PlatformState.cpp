@@ -193,6 +193,7 @@ void PlatformState::fillFrom(user_regs const& regs)
 	for(unsigned i=0;i<gpr.GPRegs.size();++i)
 		gpr.GPRegs[i]=regs.uregs[i];
 	gpr.cpsr=regs.uregs[16];
+	gpr.origR0=regs.uregs[17];
 	gpr.filled=true;
 }
 
@@ -204,7 +205,7 @@ void PlatformState::fillStruct(user_regs& regs) const
 		for(unsigned i=0;i<gpr.GPRegs.size();++i)
 			regs.uregs[i]=gpr.GPRegs[i];
 		regs.uregs[16]=gpr.cpsr;
-		// FIXME: uregs[17] is not filled
+		regs.uregs[17]=gpr.origR0;
 	}
 }
 
