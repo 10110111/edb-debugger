@@ -77,6 +77,13 @@ Register PlatformState::value(const QString &reg) const
 	const auto name=reg.toLower();
 	if(name=="cpsr")
 		return flags_register();
+#ifdef EDB_ARM32
+	if(name=="orig_r0")
+	{
+		if(!gpr.filled) return Register();
+		return make_Register<32>(name, gpr.origR0, Register::TYPE_GPR);
+	}
+#endif
 	const auto gprFoundIt=findGPR(name);
 	if(gprFoundIt!=GPR::GPRegNames.end())
 		return gp_register(gprFoundIt-GPR::GPRegNames.begin());
@@ -161,6 +168,13 @@ void PlatformState::set_register(const Register &reg)
 		set_flags(reg.value<edb::reg_t>());
 		return;
 	}
+#ifdef EDB_ARM32
+	if(name=="orig_r0")
+	{
+		gpr.origR0=reg.value<edb::reg_t>();
+		return;
+	}
+#endif
 	const auto gprFoundIt=findGPR(name);
 	if(gprFoundIt!=GPR::GPRegNames.end())
 	{
