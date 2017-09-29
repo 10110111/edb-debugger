@@ -28,12 +28,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <cstdint>
 
+#ifdef Q_OS_LINUX
+#include <asm/unistd.h>
+#include "errno-names-linux.h"
+#endif
+
+
 #include <QMenu>
 
 using std::uint32_t;
 
 namespace {
 static constexpr size_t GPR_COUNT=16;
+
+template<typename T>
+QString syscallErrName(T err) {
+#ifdef Q_OS_LINUX
+	std::size_t index=-err;
+	if(index>=sizeof errnoNames/sizeof*errnoNames) return "";
+	if(errnoNames[index]) return errnoNames[index];
+    return "";
+#else
+	return "";
+#endif
+}
+
 }
 
 int capstoneRegToGPRIndex(int capstoneReg, bool& ok) {
@@ -263,10 +282,24 @@ void updateGPRs(RegisterViewModel& model, State const& state, QString const& def
 		const auto reg=state.gp_register(i);
 		Q_ASSERT(!!reg); Q_ASSERT(reg.bitSize()==32);
 		QString comment;
-		if(i!=15)
-			comment=gprComment(reg);
-		else
-			comment=pcComment(reg,default_region_name);
+		if(i==0) {
+			const auto origR0Reg=state["orig_r0"];
+			const auto origR0=origR0Reg.valueAsSignedInteger();
+			if(origR0Reg && origR0!=-1) {
+
+				comment="orig: "+edb::value32(origR0).toHexString();
+				const auto errName=syscallErrName(reg.value<edb::value32>());
+				if(!errName.isEmpty())
+					comment="-"+errName+"; "+comment;
+			}
+		}
+		if(comment.isEmpty()) {
+
+			if(i!=15)
+				comment=gprComment(reg);
+			else
+				comment=pcComment(reg,default_region_name);
+		}
 		model.updateGPR(i,reg.value<edb::value32>(),comment);
 	}
 }
