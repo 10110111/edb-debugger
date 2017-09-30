@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "Util.h"
 #include "edb.h"
 #include "IDebugger.h"
+#include "IProcess.h"
 
 #include <cstdint>
 
@@ -34,6 +35,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 
+#include <QDomDocument>
+#include <QXmlQuery>
+#include <QFile>
 #include <QMenu>
 
 using std::uint32_t;
@@ -230,9 +234,60 @@ ArchProcessor::ArchProcessor() {
 	}
 }
 
+void analyze_syscall(const edb::Instruction &inst, QStringList &ret) {
+
+	State state;
+	edb::v1::debugger_core->get_state(&state);
+	if(state.empty())
+		return;
+	const auto r7Reg=state.gp_register(7);
+	if(!r7Reg) return;
+	const std::uint32_t r7=r7Reg.valueAsInteger();
+
+	QString syscall_entry;
+	QDomDocument syscall_xml;
+	QFile file(":/debugger/xml/syscalls.xml");
+	if(file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+
+		QXmlQuery query;
+		query.setFocus(&file);
+		const QString arch = "arm";
+		query.setQuery(QString("syscalls[@version='1.0']/linux[@arch='"+arch+"']/syscall[index=%1]").arg(r7));
+		if (query.isValid()) {
+			query.evaluateTo(&syscall_entry);
+		}
+		file.close();
+	}
+
+	if(!syscall_entry.isEmpty()) {
+		syscall_xml.setContent("" + syscall_entry + "");
+		QDomElement root = syscall_xml.documentElement();
+
+		QStringList arguments;
+		// TODO: get and show the arguments
+		ret << ArchProcessor::tr("SYSCALL: %1(%2)").arg(root.attribute("name"), arguments.join(","));
+	}
+
+}
+
 QStringList ArchProcessor::update_instruction_info(edb::address_t address) {
-	Q_UNUSED(address);
+
 	QStringList ret;
+
+	Q_ASSERT(edb::v1::debugger_core);
+
+	if(IProcess *process = edb::v1::debugger_core->process()) {
+		quint8 buffer[edb::Instruction::MAX_SIZE];
+
+		if(process->read_bytes(address, buffer, sizeof buffer)==sizeof buffer) {
+			const edb::Instruction inst(buffer, buffer + sizeof buffer, address);
+			if(inst) {
+				if(inst.operation()==ARM_INS_SVC) {
+					analyze_syscall(inst, ret);
+				}
+			}
+		}
+	}
 	return ret;
 }
 
