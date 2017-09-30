@@ -4590,4 +4590,2272 @@
 			<argument type="i" register="r9"/>
 		</syscall>
 	</linux>
+	<linux arch="arm">
+		<syscall name="restart_syscall">
+			<index>0</index>
+		</syscall>
+		<syscall name="exit">
+			<index>1</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="fork">
+			<index>2</index>
+		</syscall>
+		<syscall name="read">
+			<index>3</index>
+			<argument type="j" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="write">
+			<index>4</index>
+			<argument type="j" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="open">
+			<index>5</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="t" register="r2"/>
+		</syscall>
+		<syscall name="close">
+			<index>6</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="waitpid">
+			<index>7</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="creat">
+			<index>8</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="t" register="r1"/>
+		</syscall>
+		<syscall name="link">
+			<index>9</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+		</syscall>
+		<syscall name="unlink">
+			<index>10</index>
+			<argument type="Pc" register="r0"/>
+		</syscall>
+		<syscall name="execve">
+			<index>11</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="chdir">
+			<index>12</index>
+			<argument type="Pc" register="r0"/>
+		</syscall>
+		<syscall name="time">
+			<index>13</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="mknod">
+			<index>14</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="t" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="chmod">
+			<index>15</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="t" register="r1"/>
+		</syscall>
+		<syscall name="lchown">
+			<index>16</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="break">
+			<index>17</index>
+		</syscall>
+		<syscall name="oldstat">
+			<index>18</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="lseek">
+			<index>19</index>
+			<argument type="j" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="getpid">
+			<index>20</index>
+		</syscall>
+		<syscall name="mount">
+			<index>21</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="Pc" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+		<syscall name="umount">
+			<index>22</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="setuid">
+			<index>23</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="getuid">
+			<index>24</index>
+		</syscall>
+		<syscall name="stime">
+			<index>25</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="ptrace">
+			<index>26</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="alarm">
+			<index>27</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="oldfstat">
+			<index>28</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="pause">
+			<index>29</index>
+		</syscall>
+		<syscall name="utime">
+			<index>30</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="stty">
+			<index>31</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="gtty">
+			<index>32</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="access">
+			<index>33</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="nice">
+			<index>34</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="ftime">
+			<index>35</index>
+		</syscall>
+		<syscall name="sync">
+			<index>36</index>
+		</syscall>
+		<syscall name="kill">
+			<index>37</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="rename">
+			<index>38</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+		</syscall>
+		<syscall name="mkdir">
+			<index>39</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="t" register="r1"/>
+		</syscall>
+		<syscall name="rmdir">
+			<index>40</index>
+			<argument type="Pc" register="r0"/>
+		</syscall>
+		<syscall name="dup">
+			<index>41</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="pipe">
+			<index>42</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="times">
+			<index>43</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="prof">
+			<index>44</index>
+		</syscall>
+		<syscall name="brk">
+			<index>45</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="setgid">
+			<index>46</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="getgid">
+			<index>47</index>
+		</syscall>
+		<syscall name="signal">
+			<index>48</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="geteuid">
+			<index>49</index>
+		</syscall>
+		<syscall name="getegid">
+			<index>50</index>
+		</syscall>
+		<syscall name="acct">
+			<index>51</index>
+			<argument type="Pc" register="r0"/>
+		</syscall>
+		<syscall name="umount2">
+			<index>52</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="lock">
+			<index>53</index>
+		</syscall>
+		<syscall name="ioctl">
+			<index>54</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="fcntl">
+			<index>55</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="mpx">
+			<index>56</index>
+		</syscall>
+		<syscall name="setpgid">
+			<index>57</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="ulimit">
+			<index>58</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="oldolduname">
+			<index>59</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+		</syscall>
+		<syscall name="umask">
+			<index>60</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="chroot">
+			<index>61</index>
+			<argument type="Pc" register="r0"/>
+		</syscall>
+		<syscall name="ustat">
+			<index>62</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="dup2">
+			<index>63</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="getppid">
+			<index>64</index>
+		</syscall>
+		<syscall name="getpgrp">
+			<index>65</index>
+		</syscall>
+		<syscall name="setsid">
+			<index>66</index>
+		</syscall>
+		<syscall name="sigaction">
+			<index>67</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="sgetmask">
+			<index>68</index>
+		</syscall>
+		<syscall name="ssetmask">
+			<index>69</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="setreuid">
+			<index>70</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="setregid">
+			<index>71</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="sigsuspend">
+			<index>72</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="sigpending">
+			<index>73</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="sethostname">
+			<index>74</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="setrlimit">
+			<index>75</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="getrlimit">
+			<index>76</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="getrusage">
+			<index>77</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="gettimeofday">
+			<index>78</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="settimeofday">
+			<index>79</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="getgroups">
+			<index>80</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="setgroups">
+			<index>81</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="select">
+			<index>82</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+		<syscall name="symlink">
+			<index>83</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+		</syscall>
+		<syscall name="oldlstat">
+			<index>84</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="readlink">
+			<index>85</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="uselib">
+			<index>86</index>
+			<argument type="Pc" register="r0"/>
+		</syscall>
+		<syscall name="swapon">
+			<index>87</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="reboot">
+			<index>88</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="readdir">
+			<index>89</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+		</syscall>
+		<syscall name="mmap">
+			<index>90</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="munmap">
+			<index>91</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="truncate">
+			<index>92</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="ftruncate">
+			<index>93</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="fchmod">
+			<index>94</index>
+			<argument type="j" register="r0"/>
+			<argument type="t" register="r1"/>
+		</syscall>
+		<syscall name="fchown">
+			<index>95</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="getpriority">
+			<index>96</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="setpriority">
+			<index>97</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="profil">
+			<index>98</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+			<argument type="m" register="r3"/>
+		</syscall>
+		<syscall name="statfs">
+			<index>99</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="fstatfs">
+			<index>100</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="ioperm">
+			<index>101</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="socketcall">
+			<index>102</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="syslog">
+			<index>103</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="setitimer">
+			<index>104</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="getitimer">
+			<index>105</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="stat">
+			<index>106</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="lstat">
+			<index>107</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="fstat">
+			<index>108</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="olduname">
+			<index>109</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="iopl">
+			<index>110</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+		</syscall>
+		<syscall name="vhangup">
+			<index>111</index>
+		</syscall>
+		<syscall name="idle">
+			<index>112</index>
+		</syscall>
+		<syscall name="syscall">
+			<index>113</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+			<argument type="m" register="r3"/>
+			<argument type="m" register="r4"/>
+		</syscall>
+		<syscall name="wait4">
+			<index>114</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="swapoff">
+			<index>115</index>
+			<argument type="Pc" register="r0"/>
+		</syscall>
+		<syscall name="sysinfo">
+			<index>116</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="ipc">
+			<index>117</index>
+			<argument type="j" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="P" register="r4"/>
+			<argument type="i" register="r5"/>
+		</syscall>
+		<syscall name="fsync">
+			<index>118</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="sigreturn">
+			<index>119</index>
+		</syscall>
+		<syscall name="clone">
+			<index>120</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+		<syscall name="setdomainname">
+			<index>121</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="uname">
+			<index>122</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="modify_ldt">
+			<index>123</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+		</syscall>
+		<syscall name="adjtimex">
+			<index>124</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="mprotect">
+			<index>125</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="sigprocmask">
+			<index>126</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="create_module">
+			<index>127</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="init_module">
+			<index>128</index>
+			<argument type="P" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="Pc" register="r2"/>
+		</syscall>
+		<syscall name="delete_module">
+			<index>129</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="get_kernel_syms">
+			<index>130</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+		</syscall>
+		<syscall name="quotactl">
+			<index>131</index>
+			<argument type="j" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="getpgid">
+			<index>132</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="fchdir">
+			<index>133</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="bdflush">
+			<index>134</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="sysfs">
+			<index>135</index>
+			<argument type="i" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="personality">
+			<index>136</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="afs_syscall">
+			<index>137</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+			<argument type="m" register="r3"/>
+			<argument type="m" register="r4"/>
+		</syscall>
+		<syscall name="setfsuid">
+			<index>138</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="setfsgid">
+			<index>139</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="_llseek">
+			<index>140</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="getdents">
+			<index>141</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="_newselect">
+			<index>142</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+			<argument type="m" register="r3"/>
+			<argument type="m" register="r4"/>
+		</syscall>
+		<syscall name="flock">
+			<index>143</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="msync">
+			<index>144</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="readv">
+			<index>145</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="writev">
+			<index>146</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="getsid">
+			<index>147</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="fdatasync">
+			<index>148</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="_sysctl">
+			<index>149</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="mlock">
+			<index>150</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="munlock">
+			<index>151</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="mlockall">
+			<index>152</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="munlockall">
+			<index>153</index>
+		</syscall>
+		<syscall name="sched_setparam">
+			<index>154</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="sched_getparam">
+			<index>155</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="sched_setscheduler">
+			<index>156</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="sched_getscheduler">
+			<index>157</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="sched_yield">
+			<index>158</index>
+		</syscall>
+		<syscall name="sched_get_priority_max">
+			<index>159</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="sched_get_priority_min">
+			<index>160</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="sched_rr_get_interval">
+			<index>161</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="nanosleep">
+			<index>162</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="mremap">
+			<index>163</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="setresuid">
+			<index>164</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="getresuid">
+			<index>165</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="vm86">
+			<index>166</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+			<argument type="m" register="r3"/>
+			<argument type="m" register="r4"/>
+		</syscall>
+		<syscall name="query_module">
+			<index>167</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+			<argument type="m" register="r3"/>
+			<argument type="m" register="r4"/>
+		</syscall>
+		<syscall name="poll">
+			<index>168</index>
+			<argument type="P" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="nfsservctl">
+			<index>169</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+		</syscall>
+		<syscall name="setresgid">
+			<index>170</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="getresgid">
+			<index>171</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="prctl">
+			<index>172</index>
+			<argument type="i" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="rt_sigreturn">
+			<index>173</index>
+		</syscall>
+		<syscall name="rt_sigaction">
+			<index>174</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="rt_sigprocmask">
+			<index>175</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="rt_sigpending">
+			<index>176</index>
+			<argument type="P" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="rt_sigtimedwait">
+			<index>177</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="rt_sigqueueinfo">
+			<index>178</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="rt_sigsuspend">
+			<index>179</index>
+			<argument type="P" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="pread64">
+			<index>180</index>
+			<argument type="j" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="x" register="r4:r3"/>
+		</syscall>
+		<syscall name="pwrite64">
+			<index>181</index>
+			<argument type="j" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="x" register="r4:r3"/>
+		</syscall>
+		<syscall name="chown">
+			<index>182</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="getcwd">
+			<index>183</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="capget">
+			<index>184</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="capset">
+			<index>185</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="sigaltstack">
+			<index>186</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="sendfile">
+			<index>187</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="getpmsg">
+			<index>188</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+			<argument type="m" register="r3"/>
+			<argument type="m" register="r4"/>
+		</syscall>
+		<syscall name="putpmsg">
+			<index>189</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+			<argument type="m" register="r3"/>
+			<argument type="m" register="r4"/>
+		</syscall>
+		<syscall name="vfork">
+			<index>190</index>
+		</syscall>
+		<syscall name="ugetrlimit">
+			<index>191</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="mmap2">
+			<index>192</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+			<argument type="m" register="r3"/>
+			<argument type="m" register="r4"/>
+			<argument type="m" register="r5"/>
+		</syscall>
+		<syscall name="truncate64">
+			<index>193</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="x" register="r2:r1"/>
+		</syscall>
+		<syscall name="ftruncate64">
+			<index>194</index>
+			<argument type="j" register="r0"/>
+			<argument type="x" register="r2:r1"/>
+		</syscall>
+		<syscall name="stat64">
+			<index>195</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="lstat64">
+			<index>196</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="fstat64">
+			<index>197</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="lchown32">
+			<index>198</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+		</syscall>
+		<syscall name="getuid32">
+			<index>199</index>
+		</syscall>
+		<syscall name="getgid32">
+			<index>200</index>
+		</syscall>
+		<syscall name="geteuid32">
+			<index>201</index>
+		</syscall>
+		<syscall name="getegid32">
+			<index>202</index>
+		</syscall>
+		<syscall name="setreuid32">
+			<index>203</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="setregid32">
+			<index>204</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="getgroups32">
+			<index>205</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="setgroups32">
+			<index>206</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+		</syscall>
+		<syscall name="fchown32">
+			<index>207</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+		</syscall>
+		<syscall name="setresuid32">
+			<index>208</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+		</syscall>
+		<syscall name="getresuid32">
+			<index>209</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+		</syscall>
+		<syscall name="setresgid32">
+			<index>210</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+		</syscall>
+		<syscall name="getresgid32">
+			<index>211</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+		</syscall>
+		<syscall name="chown32">
+			<index>212</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+		</syscall>
+		<syscall name="setuid32">
+			<index>213</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+		</syscall>
+		<syscall name="setgid32">
+			<index>214</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+		</syscall>
+		<syscall name="setfsuid32">
+			<index>215</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+		</syscall>
+		<syscall name="setfsgid32">
+			<index>216</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+		</syscall>
+		<syscall name="getdents64">
+			<index>217</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="pivot_root">
+			<index>218</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+		</syscall>
+		<syscall name="mincore">
+			<index>219</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="madvise">
+			<index>220</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="fcntl64">
+			<index>221</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="gettid">
+			<index>224</index>
+		</syscall>
+		<syscall name="readahead">
+			<index>225</index>
+			<argument type="i" register="r0"/>
+			<argument type="x" register="r2:r1"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="setxattr">
+			<index>226</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="i" register="r4"/>
+		</syscall>
+		<syscall name="lsetxattr">
+			<index>227</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="i" register="r4"/>
+		</syscall>
+		<syscall name="fsetxattr">
+			<index>228</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="i" register="r4"/>
+		</syscall>
+		<syscall name="getxattr">
+			<index>229</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="lgetxattr">
+			<index>230</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="fgetxattr">
+			<index>231</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="listxattr">
+			<index>232</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="llistxattr">
+			<index>233</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="flistxattr">
+			<index>234</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="removexattr">
+			<index>235</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+		</syscall>
+		<syscall name="lremovexattr">
+			<index>236</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+		</syscall>
+		<syscall name="fremovexattr">
+			<index>237</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+		</syscall>
+		<syscall name="tkill">
+			<index>238</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="sendfile64">
+			<index>239</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="futex">
+			<index>240</index>
+			<argument type="P" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="P" register="r4"/>
+			<argument type="j" register="r5"/>
+		</syscall>
+		<syscall name="sched_setaffinity">
+			<index>241</index>
+			<argument type="i" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="sched_getaffinity">
+			<index>242</index>
+			<argument type="i" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="io_setup">
+			<index>243</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="io_destroy">
+			<index>244</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="io_getevents">
+			<index>245</index>
+			<argument type="j" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+		<syscall name="io_submit">
+			<index>246</index>
+			<argument type="j" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="io_cancel">
+			<index>247</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="exit_group">
+			<index>248</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="lookup_dcookie">
+			<index>249</index>
+			<argument type="y" register="r1:r0"/>
+			<argument type="Pc" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="epoll_create">
+			<index>250</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="epoll_ctl">
+			<index>251</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="epoll_wait">
+			<index>252</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="i" register="r3"/>
+		</syscall>
+		<syscall name="remap_file_pages">
+			<index>253</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="set_tid_address">
+			<index>256</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="timer_create">
+			<index>257</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="timer_settime">
+			<index>258</index>
+			<argument type="P" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="timer_gettime">
+			<index>259</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="timer_getoverrun">
+			<index>260</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="timer_delete">
+			<index>261</index>
+			<argument type="P" register="r0"/>
+		</syscall>
+		<syscall name="clock_settime">
+			<index>262</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="clock_gettime">
+			<index>263</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="clock_getres">
+			<index>264</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="clock_nanosleep">
+			<index>265</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="statfs64">
+			<index>266</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="fstatfs64">
+			<index>267</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="tgkill">
+			<index>268</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="utimes">
+			<index>269</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="fadvise64_64">
+			<index>270</index>
+			<argument type="i" register="r0"/>
+			<argument type="x" register="r2:r1"/>
+			<argument type="x" register="r4:r3"/>
+			<argument type="i" register="r5"/>
+		</syscall>
+		<syscall name="pciconfig_iobase">
+			<index>271</index>
+			<argument type="i" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="pciconfig_read">
+			<index>272</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+		<syscall name="pciconfig_write">
+			<index>273</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+		<syscall name="mq_open">
+			<index>274</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="t" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="mq_unlink">
+			<index>275</index>
+			<argument type="Pc" register="r0"/>
+		</syscall>
+		<syscall name="mq_timedsend">
+			<index>276</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+		<syscall name="mq_timedreceive">
+			<index>277</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+		<syscall name="mq_notify">
+			<index>278</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="mq_getsetattr">
+			<index>279</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="waitid">
+			<index>280</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="i" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+		<syscall name="socket">
+			<index>281</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="bind">
+			<index>282</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="connect">
+			<index>283</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="listen">
+			<index>284</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="accept">
+			<index>285</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="getsockname">
+			<index>286</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="getpeername">
+			<index>287</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="socketpair">
+			<index>288</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="send">
+			<index>289</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="sendto">
+			<index>290</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="P" register="r4"/>
+			<argument type="i" register="r5"/>
+		</syscall>
+		<syscall name="recv">
+			<index>291</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="recvfrom">
+			<index>292</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="P" register="r4"/>
+			<argument type="P" register="r5"/>
+		</syscall>
+		<syscall name="shutdown">
+			<index>293</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="setsockopt">
+			<index>294</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="Pc" register="r3"/>
+			<argument type="i" register="r4"/>
+		</syscall>
+		<syscall name="getsockopt">
+			<index>295</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="Pc" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+		<syscall name="sendmsg">
+			<index>296</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="recvmsg">
+			<index>297</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="semop">
+			<index>298</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="semget">
+			<index>299</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="semctl">
+			<index>300</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="msgsnd">
+			<index>301</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="i" register="r3"/>
+		</syscall>
+		<syscall name="msgrcv">
+			<index>302</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="i" register="r3"/>
+			<argument type="i" register="r4"/>
+		</syscall>
+		<syscall name="msgget">
+			<index>303</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="msgctl">
+			<index>304</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="shmat">
+			<index>305</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="shmdt">
+			<index>306</index>
+			<argument type="Pc" register="r0"/>
+		</syscall>
+		<syscall name="shmget">
+			<index>307</index>
+			<argument type="i" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="shmctl">
+			<index>308</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="add_key">
+			<index>309</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="i" register="r4"/>
+		</syscall>
+		<syscall name="request_key">
+			<index>310</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="Pc" register="r2"/>
+			<argument type="i" register="r3"/>
+		</syscall>
+		<syscall name="keyctl">
+			<index>311</index>
+			<argument type="i" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="semtimedop">
+			<index>312</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="vserver">
+			<index>313</index>
+		<!-- This entry only lists parameters with generic types - unsigned long -->
+			<argument type="m" register="r0"/>
+			<argument type="m" register="r1"/>
+			<argument type="m" register="r2"/>
+			<argument type="m" register="r3"/>
+			<argument type="m" register="r4"/>
+		</syscall>
+		<syscall name="ioprio_set">
+			<index>314</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="ioprio_get">
+			<index>315</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="inotify_init">
+			<index>316</index>
+		</syscall>
+		<syscall name="inotify_add_watch">
+			<index>317</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="inotify_rm_watch">
+			<index>318</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="mbind">
+			<index>319</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="j" register="r4"/>
+			<argument type="j" register="r5"/>
+		</syscall>
+		<syscall name="get_mempolicy">
+			<index>320</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="set_mempolicy">
+			<index>321</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="openat">
+			<index>322</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="t" register="r3"/>
+		</syscall>
+		<syscall name="mkdirat">
+			<index>323</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="t" register="r2"/>
+		</syscall>
+		<syscall name="mknodat">
+			<index>324</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="t" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="fchownat">
+			<index>325</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="i" register="r4"/>
+		</syscall>
+		<syscall name="futimesat">
+			<index>326</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="fstatat64">
+			<index>327</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="i" register="r3"/>
+		</syscall>
+		<syscall name="unlinkat">
+			<index>328</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="renameat">
+			<index>329</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="Pc" register="r3"/>
+		</syscall>
+		<syscall name="linkat">
+			<index>330</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="Pc" register="r3"/>
+			<argument type="i" register="r4"/>
+		</syscall>
+		<syscall name="symlinkat">
+			<index>331</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="Pc" register="r2"/>
+		</syscall>
+		<syscall name="readlinkat">
+			<index>332</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="Pc" register="r2"/>
+			<argument type="i" register="r3"/>
+		</syscall>
+		<syscall name="fchmodat">
+			<index>333</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="t" register="r2"/>
+		</syscall>
+		<syscall name="faccessat">
+			<index>334</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="pselect6">
+			<index>335</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="P" register="r4"/>
+			<argument type="P" register="r5"/>
+		</syscall>
+		<syscall name="ppoll">
+			<index>336</index>
+			<argument type="P" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="unshare">
+			<index>337</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="set_robust_list">
+			<index>338</index>
+			<argument type="P" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="get_robust_list">
+			<index>339</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="splice">
+			<index>340</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="j" register="r4"/>
+			<argument type="j" register="r5"/>
+		</syscall>
+		<syscall name="sync_file_range2">
+			<index>341</index>
+			<argument type="i" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="x" register="r3:r2"/>
+			<argument type="x" register="r5:r4"/>
+		</syscall>
+		<syscall name="tee">
+			<index>342</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="vmsplice">
+			<index>343</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="move_pages">
+			<index>344</index>
+			<argument type="i" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="P" register="r4"/>
+			<argument type="i" register="r5"/>
+		</syscall>
+		<syscall name="getcpu">
+			<index>345</index>
+			<argument type="P" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+		</syscall>
+		<syscall name="epoll_pwait">
+			<index>346</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="i" register="r3"/>
+			<argument type="P" register="r4"/>
+			<argument type="j" register="r5"/>
+		</syscall>
+		<syscall name="kexec_load">
+			<index>347</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="utimensat">
+			<index>348</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="i" register="r3"/>
+		</syscall>
+		<syscall name="signalfd">
+			<index>349</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="timerfd_create">
+			<index>350</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="eventfd">
+			<index>351</index>
+			<argument type="j" register="r0"/>
+		</syscall>
+		<syscall name="fallocate">
+			<index>352</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="x" register="r3:r2"/>
+			<argument type="x" register="r5:r4"/>
+		</syscall>
+		<syscall name="timerfd_settime">
+			<index>353</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="timerfd_gettime">
+			<index>354</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="signalfd4">
+			<index>355</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="i" register="r3"/>
+		</syscall>
+		<syscall name="eventfd2">
+			<index>356</index>
+			<argument type="j" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="epoll_create1">
+			<index>357</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="dup3">
+			<index>358</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="pipe2">
+			<index>359</index>
+			<argument type="P" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="inotify_init1">
+			<index>360</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="preadv">
+			<index>361</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="pwritev">
+			<index>362</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="rt_tgsigqueueinfo">
+			<index>363</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="perf_event_open">
+			<index>364</index>
+			<argument type="P" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="i" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="recvmmsg">
+			<index>365</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+		<syscall name="accept4">
+			<index>366</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="i" register="r3"/>
+		</syscall>
+		<syscall name="fanotify_init">
+			<index>367</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="fanotify_mark">
+			<index>368</index>
+			<argument type="i" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="y" register="r3:r2"/>
+			<argument type="i" register="r4"/>
+			<argument type="Pc" register="r5"/>
+		</syscall>
+		<syscall name="prlimit64">
+			<index>369</index>
+			<argument type="i" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="P" register="r3"/>
+		</syscall>
+		<syscall name="name_to_handle_at">
+			<index>370</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="i" register="r4"/>
+		</syscall>
+		<syscall name="open_by_handle_at">
+			<index>371</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="clock_adjtime">
+			<index>372</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+		</syscall>
+		<syscall name="syncfs">
+			<index>373</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="sendmmsg">
+			<index>374</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="setns">
+			<index>375</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="process_vm_readv">
+			<index>376</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="j" register="r4"/>
+			<argument type="j" register="r5"/>
+		</syscall>
+		<syscall name="process_vm_writev">
+			<index>377</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="j" register="r4"/>
+			<argument type="j" register="r5"/>
+		</syscall>
+		<syscall name="kcmp">
+			<index>378</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="finit_module">
+			<index>379</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="sched_setattr">
+			<index>380</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="sched_getattr">
+			<index>381</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+		</syscall>
+		<syscall name="renameat2">
+			<index>382</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="Pc" register="r3"/>
+			<argument type="j" register="r4"/>
+		</syscall>
+		<syscall name="seccomp">
+			<index>383</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="Pc" register="r2"/>
+		</syscall>
+		<syscall name="getrandom">
+			<index>384</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="memfd_create">
+			<index>385</index>
+			<argument type="Pc" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="bpf">
+			<index>386</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+		</syscall>
+		<syscall name="execveat">
+			<index>387</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="P" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="i" register="r4"/>
+		</syscall>
+		<syscall name="userfaultfd">
+			<index>388</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="membarrier">
+			<index>389</index>
+			<argument type="i" register="r0"/>
+			<argument type="i" register="r1"/>
+		</syscall>
+		<syscall name="mlock2">
+			<index>390</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="i" register="r2"/>
+		</syscall>
+		<syscall name="copy_file_range">
+			<index>391</index>
+			<argument type="i" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="i" register="r2"/>
+			<argument type="P" register="r3"/>
+			<argument type="j" register="r4"/>
+			<argument type="j" register="r5"/>
+		</syscall>
+		<syscall name="preadv2">
+			<index>392</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="j" register="r4"/>
+			<argument type="i" register="r5"/>
+		</syscall>
+		<syscall name="pwritev2">
+			<index>393</index>
+			<argument type="j" register="r0"/>
+			<argument type="P" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="j" register="r4"/>
+			<argument type="i" register="r5"/>
+		</syscall>
+		<syscall name="pkey_mprotect">
+			<index>394</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="i" register="r3"/>
+		</syscall>
+		<syscall name="pkey_alloc">
+			<index>395</index>
+			<argument type="j" register="r0"/>
+			<argument type="j" register="r1"/>
+		</syscall>
+		<syscall name="pkey_free">
+			<index>396</index>
+			<argument type="i" register="r0"/>
+		</syscall>
+		<syscall name="statx">
+			<index>397</index>
+			<argument type="i" register="r0"/>
+			<argument type="Pc" register="r1"/>
+			<argument type="j" register="r2"/>
+			<argument type="j" register="r3"/>
+			<argument type="P" register="r4"/>
+		</syscall>
+	</linux>
 </syscalls>
