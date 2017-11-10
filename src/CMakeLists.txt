@@ -56,6 +56,7 @@ include_directories(
 )
 
 set(edb_SRCS
+	ArchProcessorCommon.cpp
 	BasicBlock.cpp
 	BinaryString.cpp
 	ByteShiftArray.cpp

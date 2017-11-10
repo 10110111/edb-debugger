@@ -264,7 +264,15 @@ void analyze_syscall(const edb::Instruction &inst, QStringList &ret) {
 		QDomElement root = syscall_xml.documentElement();
 
 		QStringList arguments;
-		// TODO: get and show the arguments
+		for (QDomElement argument = root.firstChildElement("argument"); !argument.isNull(); argument = argument.nextSiblingElement("argument")) {
+			const QString argument_type     = argument.attribute("type");
+			const QString argument_register = argument.attribute("register");
+			const auto reg=state[argument_register];
+			if(reg) {
+				arguments << format_argument(argument_type, reg);
+				continue;
+			}
+		}
 		ret << ArchProcessor::tr("SYSCALL: %1(%2)").arg(root.attribute("name"), arguments.join(","));
 	}
 
